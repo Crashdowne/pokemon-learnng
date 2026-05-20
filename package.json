@@ -4,7 +4,8 @@
   "description": "A spaced repetition flashcard system for learning Pokemon type matchups",
   "main": "app.js",
   "scripts": {
-    "dev": "npx wrangler pages dev"
+    "dev": "npx wrangler pages dev",
+    "build": "echo 'Static site, no build needed'"
   },
   "keywords": ["pokemon", "flashcards", "spaced-repetition", "learning"],
   "author": "",
