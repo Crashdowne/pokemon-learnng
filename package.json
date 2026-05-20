@@ -4,13 +4,9 @@
   "description": "A spaced repetition flashcard system for learning Pokemon type matchups",
   "main": "app.js",
   "scripts": {
-    "dev": "npx wrangler pages dev",
-    "build": "echo 'Static site, no build needed'"
+    "dev": "python3 -m http.server"
   },
   "keywords": ["pokemon", "flashcards", "spaced-repetition", "learning"],
   "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "wrangler": "^3.0.0"
-  }
+  "license": "MIT"
 }

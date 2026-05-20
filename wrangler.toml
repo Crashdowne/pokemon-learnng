@@ -1,4 +1,0 @@
-name = "pokemon-flashcards"
-
-# Static site configuration for Cloudflare Pages
-pages_build_output_dir = "."

@@ -6,45 +6,31 @@ A single-page flashcard trainer for Pokemon type matchups. Answer the multiplier
 
 ### Run Locally
 
-**Option 1: Python HTTP server**
 ```bash
-python3 -m http.server
+npm run dev
 ```
 Then open `http://localhost:8000` in your browser.
 
-**Option 2: VS Code Live Server**
-Right-click `index.html` → "Open with Live Server".
-
-**Option 3: Cloudflare Pages Dev**
-```bash
-npm install
-npm run dev
-```
-Then open the provided local URL (usually `http://localhost:8788`).
+Alternatively, use any local HTTP server (Python, Node, VS Code Live Server, etc.).
 
 ## Deployment to Cloudflare Pages
 
 ### Prerequisites
 - Cloudflare account (free tier works)
-- GitHub/GitLab repository
+- GitHub repository
 
-### Steps
+### Steps (Recommended)
 
-**Option 1: Automatic (Recommended)**
-1. Push your repo to GitHub
+1. Push your code to GitHub
 2. Go to [Cloudflare Pages Dashboard](https://dash.cloudflare.com/)
 3. Click "Create a project" → "Connect to Git"
-4. Select your repository and authorize
-5. Framework: select "None" (static site)
-6. Deploy
+4. Select your repository
+5. Framework: **None** (this is a static site)
+6. Build command: leave blank
+7. Build output directory: leave blank
+8. Click "Save and Deploy"
 
-Cloudflare automatically redeploys whenever you push to main.
-
-**Option 2: Manual CLI Deploy**
-```bash
-npm install
-npx wrangler pages deploy
-```
+Cloudflare Pages will automatically redeploy whenever you push to `main`.
 
 ### What Gets Deployed
 
