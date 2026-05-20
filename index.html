@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Type Matchup Trainer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app">
+      <header class="top-bar">
+        <div>
+          <p class="eyebrow">Pokemon Type Matchups</p>
+          <h1>Type Matchup Trainer</h1>
+          <p class="subhead">
+            Answer the multiplier for each attack and master the full type chart.
+          </p>
+        </div>
+        <div class="progress-card">
+          <div class="progress-row">
+            <span>Mastered</span>
+            <strong id="masteredCount">0</strong>
+          </div>
+          <div class="progress-row">
+            <span>Remaining</span>
+            <strong id="remainingCount">0</strong>
+          </div>
+          <div class="progress-row">
+            <span>Total</span>
+            <strong id="totalCount">0</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="card-panel">
+          <div class="flashcard">
+            <div class="badge" id="cardSource">Built-in</div>
+            <p class="question-label">Question</p>
+            <h2 id="questionText">Loading question...</h2>
+            <p class="question-sub" id="questionSub">
+              Choose the effectiveness multiplier.
+            </p>
+            <div class="answers" id="answerButtons"></div>
+            <div class="feedback" id="feedback"></div>
+            <button class="btn primary" id="nextButton" type="button">
+              Next card
+            </button>
+          </div>
+          <div class="controls">
+            <button class="btn ghost" id="resetDeck" type="button">Reset deck</button>
+            <button class="btn ghost" id="toggleForm" type="button">
+              Add a new card
+            </button>
+          </div>
+        </section>
+
+        <section class="form-panel" id="formPanel">
+          <div class="form-card">
+            <h3>Add a custom flashcard</h3>
+            <p class="form-help">
+              Create your own matchup for focused practice. Choose the attacking
+              type, defending type(s), and the multiplier you want to drill.
+            </p>
+            <form id="cardForm">
+              <label>
+                Attacking type
+                <select id="attackerType"></select>
+              </label>
+              <label>
+                Defending type 1
+                <select id="defenderTypeOne"></select>
+              </label>
+              <label>
+                Defending type 2 (optional)
+                <select id="defenderTypeTwo"></select>
+              </label>
+              <label>
+                Correct multiplier
+                <select id="multiplier">
+                  <option value="0">0x</option>
+                  <option value="0.25">0.25x</option>
+                  <option value="0.5">0.5x</option>
+                  <option value="1">1x</option>
+                  <option value="2">2x</option>
+                  <option value="4">4x</option>
+                </select>
+              </label>
+              <button class="btn primary" type="submit">Add card</button>
+              <p class="form-error" id="formError"></p>
+              <p class="form-success" id="formSuccess"></p>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>
+          Mastery rule: a card is mastered after three consecutive correct answers.
+        </p>
+      </footer>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

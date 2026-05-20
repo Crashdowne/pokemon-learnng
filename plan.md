@@ -1,0 +1,20 @@
+You are creating a flash card system that functions in the following way:
+
+Background: We are making a pokemon type chart flash card system to help users learn the strengths and weaknesses of different pokemon types. Each flash card will have a question on the front and an answer on the back.
+
+Here are the steps for how the flash card system will work 
+(Spaced Repition System, research this for more details on how it works and why it is effective for learning to implement it correctly):
+
+1) User is shown a flash card with a question on the front, which lists whether a specific pokemon type is strong, weak, or neutral against another type. For example, the question might be: "Is Fire strong, weak, or neutral against Grass?" (0x, 0.5x, 1x, 2x and 4x are the possible answers, where 0x means the type is weak against the other type, 0.5x means it is neutral, 1x means it is strong, and 2x and 4x mean it is very strong). 
+- Type details in the pokemon_flashcard_reference_code.txt file.
+2) If the user gets it correct, put the card to the back of the deck and move to the next card
+3) If the user gets it wrong, place it closer to the front of the deck so they will see it again sooner, and move to the next card (randomly choosing a position for the card between the front and the middle of the deck).
+4) Continue this process until the user has gone through all the cards in the deck, and then repeat the process until they have mastered all the cards.
+
+UI: The UI will be simple and friendly, the user will see the question on the front of the card and will have buttons to select their answer (0x, 0.5x, 1x, 2x, 4x). After they select an answer, they will receive immediate feedback on whether they were correct or not, and the card will be moved accordingly in the deck. The user will also have the option to view their progress, which will show them how many cards they have mastered and how many they still need to work on. Additionally, there will be a feature to reset the deck, allowing users to start over if they want to review all the cards again. The overall design will be colorful and engaging, with pokemon-themed graphics to make the learning experience enjoyable.
+
+The app will be made in simple HTML, CSS, and JavaScript, and will be designed to be responsive so it can be used on both desktop and mobile devices. The flash cards will be stored in a JavaScript array, and the logic for moving the cards in the deck will be implemented using JavaScript functions. The app will also include a progress tracking system that updates as the user interacts with the flash cards, allowing them to see their improvement over time.
+
+The reference infromation for the pokemon types and their strengths and weaknesses will be stored in a separate JavaScript file (pokemon_flashcard_reference_code.txt) that will be imported into the main app.
+
+Create a way and UI to easily add new flash cards to the system, allowing users to expand their learning experience. This feature will include a form where users can input the pokemon types and their corresponding strengths and weaknesses, which will then be added to the flash card deck. The form will have fields for the type being tested, the type it is being compared against, and the strength (0x, 0.5x, 1x, 2x, or 4x). Once submitted, the new flash card will be added to the deck and will be available for review in the same way as the existing cards. This will allow users to customize their learning experience and focus on specific types they want to learn more about.The form will also include validation to ensure that the input is correct and that the strength value is one of the allowed options. The UI for adding new flash cards will be designed to be user-friendly and intuitive, with clear instructions and a simple layout. The form will be accessible from the main interface, allowing users to easily switch between reviewing flash cards and adding new ones. This feature will enhance the flexibility and usability of the flash card system, making it a more comprehensive tool for learning about pokemon types and their interactions.

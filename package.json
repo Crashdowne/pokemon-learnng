@@ -1,0 +1,17 @@
+{
+  "name": "pokemon-flashcards",
+  "version": "1.0.0",
+  "description": "A spaced repetition flashcard system for learning Pokemon type matchups",
+  "main": "app.js",
+  "scripts": {
+    "dev": "npx wrangler pages dev",
+    "deploy": "npx wrangler pages deploy",
+    "build": "echo 'No build step required for static site'"
+  },
+  "keywords": ["pokemon", "flashcards", "spaced-repetition", "learning"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
