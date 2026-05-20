@@ -1,21 +1,4 @@
 name = "pokemon-flashcards"
-type = "javascript"
-account_id = ""
-workers_dev = true
-route = ""
-zone_id = ""
 
-[env.production]
-name = "pokemon-flashcards-prod"
-routes = [
-  { pattern = "example.com", zone_name = "example.com" }
-]
-
-[build]
-command = "npm run build"
-cwd = "./"
-watch_paths = ["src/**/*.js", "src/**/*.css"]
-
-[build.upload]
-format = "modules"
-main = "./index.html"
+# Static site configuration for Cloudflare Pages
+pages_build_output_dir = "."

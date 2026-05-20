@@ -26,27 +26,25 @@ Then open the provided local URL (usually `http://localhost:8788`).
 
 ### Prerequisites
 - Cloudflare account (free tier works)
-- Git repository (push code to GitHub/GitLab)
-- Node.js and npm installed
+- GitHub/GitLab repository
 
 ### Steps
 
-1. **Install Wrangler CLI:**
-   ```bash
-   npm install
-   ```
+**Option 1: Automatic (Recommended)**
+1. Push your repo to GitHub
+2. Go to [Cloudflare Pages Dashboard](https://dash.cloudflare.com/)
+3. Click "Create a project" → "Connect to Git"
+4. Select your repository and authorize
+5. Framework: select "None" (static site)
+6. Deploy
 
-2. **Authenticate with Cloudflare:**
-   ```bash
-   npx wrangler login
-   ```
+Cloudflare automatically redeploys whenever you push to main.
 
-3. **Deploy to Cloudflare Pages:**
-   ```bash
-   npm run deploy
-   ```
-
-Alternatively, connect your Git repository to Cloudflare Pages in the dashboard for automatic deployments on every push.
+**Option 2: Manual CLI Deploy**
+```bash
+npm install
+npx wrangler pages deploy
+```
 
 ### What Gets Deployed
 
