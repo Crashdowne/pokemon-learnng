@@ -13,6 +13,16 @@ Then open `http://localhost:8000` in your browser.
 
 Alternatively, use any local HTTP server (Python, Node, VS Code Live Server, etc.).
 
+## Production Build
+
+Build the optimized static site into `dist/`:
+
+```bash
+npm run build
+```
+
+This bundles and minifies `app.js`, then copies `index.html` and `styles.css` into `dist/`.
+
 ## Deployment to Cloudflare Pages
 
 ### Prerequisites
@@ -26,9 +36,25 @@ Alternatively, use any local HTTP server (Python, Node, VS Code Live Server, etc
 3. Click "Create a project" → "Connect to Git"
 4. Select your repository
 5. Framework: **None** (this is a static site)
-6. Build command: leave blank
-7. Build output directory: leave blank
+6. Build command: `npm run build`
+7. Build output directory: `dist`
 8. Click "Save and Deploy"
+
+### Wrangler / CLI Option
+
+If you prefer the CLI, you can deploy the built `dist/` folder with Cloudflare Pages:
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name pokemon-flashcards
+```
+
+### Recommended Pages Settings
+
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Root directory: repository root
+- Node version: current LTS
 
 Cloudflare Pages will automatically redeploy whenever you push to `main`.
 
