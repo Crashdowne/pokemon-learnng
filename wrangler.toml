@@ -1,3 +1,6 @@
 name = "pokemon-flashcards"
-pages_build_output_dir = "dist"
+main = "src/index.js"
 compatibility_date = "2026-05-26"
+
+[assets]
+directory = "./dist"

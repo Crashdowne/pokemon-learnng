@@ -5,12 +5,19 @@
   "main": "app.js",
   "scripts": {
     "dev": "python3 -m http.server",
-    "build": "node build.js"
+    "build": "node build.js",
+    "deploy": "npm run build && wrangler deploy"
   },
-  "keywords": ["pokemon", "flashcards", "spaced-repetition", "learning"],
+  "keywords": [
+    "pokemon",
+    "flashcards",
+    "spaced-repetition",
+    "learning"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "esbuild": "^0.25.5"
+    "esbuild": "^0.25.5",
+    "wrangler": "^4.95.0"
   }
 }

@@ -23,7 +23,7 @@ npm run build
 
 This bundles and minifies `app.js`, then copies `index.html` and `styles.css` into `dist/`.
 
-## Deployment to Cloudflare Pages
+## Deployment to Cloudflare Workers
 
 ### Prerequisites
 - Cloudflare account (free tier works)
@@ -33,48 +33,48 @@ This bundles and minifies `app.js`, then copies `index.html` and `styles.css` in
 ### Steps (Recommended)
 
 1. Push your code to GitHub
-2. Go to [Cloudflare Pages Dashboard](https://dash.cloudflare.com/)
-3. Click "Create a project" → "Connect to Git"
+2. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/)
+3. Create a new Worker and connect it to GitHub
 4. Select your repository
 5. Use these build settings:
 
 ```text
-Framework preset: None
 Build command: npm run build
-Build output directory: dist
-Root directory: /
-Install command: npm install
+Assets directory: dist
+Main entrypoint: src/index.js
 Node version: current LTS
 ```
 
 6. Click "Save and Deploy"
 
-Cloudflare Pages will install dependencies from `package-lock.json`, run `npm run build`, and publish the generated `dist/` folder.
+Cloudflare Workers will install dependencies from `package-lock.json`, run `npm run build`, and publish the generated `dist/` folder through the Worker asset binding.
+
+If you see an error mentioning `main = "src/index.ts"`, your Cloudflare config is still pointing at a different Worker entrypoint. This repo now uses `src/index.js`.
 
 ### Wrangler / CLI Option
 
-If you prefer the CLI, you can deploy the built `dist/` folder with Cloudflare Pages:
+If you prefer the CLI, you can deploy the Worker directly:
 
 ```bash
 npm run build
-npx wrangler pages deploy dist --project-name pokemon-flashcards
+npm run deploy
 ```
 
-### Recommended Pages Settings
+### Recommended Worker Settings
 
 - Build command: `npm run build`
-- Build output directory: `dist`
-- Root directory: repository root
+- Assets directory: `dist`
+- Main entrypoint: `src/index.js`
 - Node version: current LTS
-- Install command: `npm install`
 
-Cloudflare Pages will automatically redeploy whenever you push to `main`.
+Cloudflare Workers will automatically redeploy whenever you push to `main`.
 
 ### What Gets Deployed
 
 - Static HTML, CSS, and JavaScript files
 - All data is stored in localStorage (no backend required)
 - Custom flashcards and progress persist in the browser
+- The Worker serves the built files from `dist/`
 
 ## Features
 
