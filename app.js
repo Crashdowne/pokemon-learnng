@@ -197,11 +197,79 @@ const updateProgressUI = () => {
 
 const formatDefenders = (defenders) => defenders.join("/");
 
+const formatMultiplier = (multiplier) => `${multiplier}x`;
+
+const describeEffect = (attacker, defender, multiplier) => {
+  if (multiplier === 0) {
+    return `${defender} is immune to ${attacker}, so it contributes 0x.`;
+  }
+
+  if (multiplier === 0.5) {
+    return `${defender} resists ${attacker}, so it contributes 0.5x.`;
+  }
+
+  if (multiplier === 1) {
+    return `${defender} takes neutral damage from ${attacker}, so it contributes 1x.`;
+  }
+
+  if (multiplier === 2) {
+    return `${defender} is weak to ${attacker}, so it contributes 2x.`;
+  }
+
+  if (multiplier === 4) {
+    return `${defender} has a double weakness to ${attacker}, so it contributes 4x.`;
+  }
+
+  return `${defender} contributes ${formatMultiplier(multiplier)}.`;
+};
+
+const buildEffectivenessExplanation = (card) => {
+  const perDefender = card.defenders.map((defender) => {
+    const multiplier = getEffectiveness(card.attacker, defender);
+    return describeEffect(card.attacker, defender, multiplier);
+  });
+
+  if (card.defenders.length === 1) {
+    return `Why ${formatMultiplier(card.correct)}: ${perDefender[0]}`;
+  }
+
+  const perDefenderMultipliers = card.defenders
+    .map((defender) => formatMultiplier(getEffectiveness(card.attacker, defender)))
+    .join(" × ");
+
+  return `Why ${formatMultiplier(card.correct)}: ${card.attacker} vs ${formatDefenders(card.defenders)} is ${perDefenderMultipliers} = ${formatMultiplier(card.correct)} total. ${perDefender.join(" ")}`;
+};
+
+const resetFeedbackState = () => {
+  elements.feedback.classList.remove("success", "error");
+};
+
+const setFeedback = (message, isCorrect) => {
+  elements.feedback.textContent = message;
+  elements.feedback.classList.toggle("success", isCorrect);
+  elements.feedback.classList.toggle("error", !isCorrect);
+};
+
+const setAnswerButtonState = (selectedValue, card) => {
+  Array.from(elements.answerButtons.querySelectorAll("button")).forEach((button) => {
+    const buttonValue = Number(button.dataset.value);
+    const isCorrect = buttonValue === card.correct;
+    const isSelected = buttonValue === selectedValue;
+
+    button.disabled = true;
+    button.classList.toggle("correct", isCorrect);
+    button.classList.toggle("wrong", isSelected && !isCorrect);
+  });
+};
+
 const renderQuestion = () => {
   const card = state.queue[0];
   state.currentCard = card || null;
   elements.feedback.textContent = "";
+  elements.questionSub.textContent = "Pick the exact effectiveness multiplier.";
+  resetFeedbackState();
   elements.nextButton.style.display = "none";
+  elements.nextButton.textContent = "Continue";
   elements.answerButtons.innerHTML = "";
   state.awaitingNext = false;
 
@@ -221,15 +289,11 @@ const renderQuestion = () => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "btn answer";
+    button.dataset.value = String(value);
     button.textContent = `${value}x`;
     button.addEventListener("click", () => handleAnswer(value));
     elements.answerButtons.appendChild(button);
   });
-};
-
-const setFeedback = (message, isCorrect) => {
-  elements.feedback.textContent = message;
-  elements.feedback.style.color = isCorrect ? "#2d6a4f" : "#b31237";
 };
 
 const handleAnswer = (value) => {
@@ -237,13 +301,17 @@ const handleAnswer = (value) => {
   const card = state.currentCard;
   const progress = normalizeProgress(card.id);
   const isCorrect = value === card.correct;
+  const explanation = buildEffectivenessExplanation(card);
+
+  elements.questionSub.textContent = explanation;
+  setAnswerButtonState(value, card);
 
   if (isCorrect) {
     progress.streak += 1;
     if (progress.streak >= MASTERY_THRESHOLD) {
       progress.mastered = true;
       state.queue.shift();
-      setFeedback(`Correct. Card mastered at ${card.correct}x.`, true);
+      setFeedback(`Correct. ${card.attacker} now lands for ${formatMultiplier(card.correct)} here.`, true);
     } else {
       state.queue.shift();
       state.queue.push(card);
@@ -255,7 +323,7 @@ const handleAnswer = (value) => {
     const insertLimit = Math.max(1, Math.floor(state.queue.length / 2));
     const insertIndex = Math.floor(Math.random() * insertLimit);
     state.queue.splice(insertIndex, 0, card);
-    setFeedback(`Not quite. Correct answer is ${card.correct}x.`, false);
+    setFeedback(`Not quite. You picked ${formatMultiplier(value)}, but the correct answer is ${formatMultiplier(card.correct)}.`, false);
   }
 
   state.awaitingNext = true;

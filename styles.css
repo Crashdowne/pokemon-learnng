@@ -164,6 +164,18 @@ h1 {
   transform: translateY(-1px);
 }
 
+#nextButton {
+  display: none;
+  background: linear-gradient(180deg, #3d5a80 0%, #2f4565 100%);
+  color: white;
+  box-shadow: 0 10px 20px rgba(47, 69, 101, 0.24);
+}
+
+#nextButton:hover {
+  background: linear-gradient(180deg, #4b6d99 0%, #345070 100%);
+  transform: translateY(-1px);
+}
+
 .btn.ghost {
   background: transparent;
   color: var(--secondary);
@@ -181,18 +193,49 @@ h1 {
 }
 
 .btn.answer.correct {
-  background: #b7e4c7;
+  background: linear-gradient(180deg, #d8f3dc 0%, #b7e4c7 100%);
+  color: #1b4332;
+  box-shadow: 0 10px 18px rgba(45, 106, 79, 0.2);
+  border: 1px solid rgba(45, 106, 79, 0.25);
 }
 
 .btn.answer.wrong {
-  background: #f7b3b3;
+  background: linear-gradient(180deg, #fae1e1 0%, #f7b3b3 100%);
+  color: #7a1f2f;
+  box-shadow: 0 10px 18px rgba(179, 18, 55, 0.14);
+  border: 1px solid rgba(179, 18, 55, 0.22);
+}
+
+.btn.answer:disabled {
+  cursor: default;
+  transform: none;
+}
+
+.btn.answer:disabled:hover {
+  box-shadow: none;
 }
 
 .feedback {
   min-height: 28px;
   font-weight: 600;
-  color: var(--muted);
   margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(31, 26, 20, 0.08);
+  color: var(--muted);
+}
+
+.feedback.success {
+  color: #1b4332;
+  background: #e7f7ec;
+  border-color: rgba(45, 106, 79, 0.18);
+}
+
+.feedback.error {
+  color: #7a1f2f;
+  background: #fdecec;
+  border-color: rgba(179, 18, 55, 0.18);
 }
 
 .controls {
