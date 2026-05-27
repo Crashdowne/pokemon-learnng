@@ -28,6 +28,7 @@ This bundles and minifies `app.js`, then copies `index.html` and `styles.css` in
 ### Prerequisites
 - Cloudflare account (free tier works)
 - GitHub repository
+- `package-lock.json` checked in for deterministic installs
 
 ### Steps (Recommended)
 
@@ -35,10 +36,20 @@ This bundles and minifies `app.js`, then copies `index.html` and `styles.css` in
 2. Go to [Cloudflare Pages Dashboard](https://dash.cloudflare.com/)
 3. Click "Create a project" → "Connect to Git"
 4. Select your repository
-5. Framework: **None** (this is a static site)
-6. Build command: `npm run build`
-7. Build output directory: `dist`
-8. Click "Save and Deploy"
+5. Use these build settings:
+
+```text
+Framework preset: None
+Build command: npm run build
+Build output directory: dist
+Root directory: /
+Install command: npm install
+Node version: current LTS
+```
+
+6. Click "Save and Deploy"
+
+Cloudflare Pages will install dependencies from `package-lock.json`, run `npm run build`, and publish the generated `dist/` folder.
 
 ### Wrangler / CLI Option
 
@@ -55,6 +66,7 @@ npx wrangler pages deploy dist --project-name pokemon-flashcards
 - Build output directory: `dist`
 - Root directory: repository root
 - Node version: current LTS
+- Install command: `npm install`
 
 Cloudflare Pages will automatically redeploy whenever you push to `main`.
 
